@@ -1,0 +1,27 @@
+
+<div>
+    <input type="text" [(ngModel)]="usuacodi" >
+    <button id="buscar" (click)="getUser()" type="button" class="btn btn-primary">Buscar</button>
+</div>
+<div class="col-8">
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">Cedula</th>
+			<th scope="col">Nombre</th>
+			<th scope="col">Edad</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Correo</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr >
+			<td>{{ usuarios.usuacodi | number }}</td>
+			<td>{{ usuarios.usuanomb }}</td>
+            <td>{{ usuarios.usuaedad | number }}</td>
+            <td>{{ usuarios.usuadire  }}</td>
+            <td>{{ usuarios.usuaemail  }}</td>
+		</tr>
+	</tbody>
+</table>
+</div>
