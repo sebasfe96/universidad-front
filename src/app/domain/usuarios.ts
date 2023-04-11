@@ -5,5 +5,6 @@ export class Usuarios{
     usuadire: string | undefined;
     usuatele: string | undefined;
     usuaemail: string | undefined;
-    
+    usuaesta: number | undefined;
+    usuacamp: number | undefined;
 }

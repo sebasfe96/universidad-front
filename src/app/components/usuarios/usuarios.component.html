@@ -1,0 +1,187 @@
+<p-messages></p-messages>
+<div class="grid">
+	<div class="col-12 md:col-6">
+			<div class="formgroup-inline">
+				<button pButton label="Crear" (click)="showDisplayCreate()"></button>
+			</div>
+	</div>
+
+	<div class="col-12">
+			<h5>Usuarios Admin</h5>
+			<p-table #dt1 [value]="lstUsuarios" dataKey="id" [rows]="10"  [rowHover]="true" styleClass="p-datatable-gridlines"  
+			[globalFilterFields]="[]" responsiveLayout="scroll" scrollHeight="400px" responsiveLayout="scroll" >
+				<ng-template pTemplate="header">
+					<tr>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Documento
+								<p-columnFilter type="text" field="name" display="menu" placeholder="Search by name"></p-columnFilter>
+							</div>
+						</th>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Nombre
+								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Edad
+								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Email
+								<p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy"></p-columnFilter>
+							</div>
+						</th>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Direccion
+								<p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
+							</div>
+						</th>
+						
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Telefono
+								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Campaña
+								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Estado
+								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
+							</div>
+						</th>
+						<th>
+							<div class="flex justify-content-between align-items-center">
+								Opciones
+							</div>
+						</th>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="body" let-usua>
+					<tr>
+						<td>
+							{{usua.usuacodi}}
+						</td>
+						<td>
+							{{usua.usuanomb}}
+						</td>
+						<td>
+							{{usua.usuaedad}}
+						</td>
+						<td>
+							{{usua.usuaemail}}
+						</td>
+						<td>
+							{{usua.usuadire}}
+						</td>
+						<td>
+							{{usua.usuatele}}
+						</td>
+						<td>
+							{{estadoCamp(usua.usuacamp)}}
+						</td>
+						<td>
+							{{estado(usua.usuaesta)}}
+						</td>
+						<td>
+                        <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-secundary p-button-text" (click)="showDisplayEdit(usua)"></p-button>
+						<p-button icon="pi pi-trash" styleClass="p-button-rounded p-button-secundary p-button-text" (click)="confirmarEliminarUser(usua)"></p-button>
+						</td>
+						
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="emptymessage">
+					<tr>
+						<td colspan="8">No customers found.</td>
+					</tr>
+				</ng-template>
+				<ng-template pTemplate="loadingbody">
+					<tr>
+						<td colspan="8">Loading customers data. Please wait.</td>
+					</tr>
+				</ng-template>
+    		</p-table>
+
+	</div>
+	<form #UserForm [formGroup]="userForm">
+		<p-dialog header="Gestión Usuarios" [(visible)]="displayCreate" [modal]="true" showEffect="fade" [style]="{width: '500px'}" [breakpoints]="{'960px': '75vw'}">
+			<div class="col-12 md:col-6">
+				<div class="card p-fluid">
+					
+					<div class="field grid">
+						<label htmlFor="usuacodi" class="col-12 mb-2 md:col-2 md:mb-0">Documento</label>
+						<div class="col-12 md:col-10">
+							<input pInputText id="usuacodi" type="text" formControlName="usuacodi"/>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuanomb" class="col-12 mb-2 md:col-2 md:mb-0">Nombre</label>
+						<div class="col-12 md:col-10">
+							<input pInputText id="usuanomb" type="text" formControlName="usuanomb"/>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuaedad" class="col-12 mb-2 md:col-2 md:mb-0">Edad</label>
+						<div class="col-12 md:col-10">
+							<input pInputText id="usuaedad" type="number" formControlName="usuaedad"/>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuaemail" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
+						<div class="col-12 md:col-10">
+							<input pInputText id="usuaemail" type="text" formControlName="usuaemail"/>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuadire" class="col-12 mb-2 md:col-2 md:mb-0">Dirección</label>
+						<div class="col-12 md:col-10">
+							<input pInputText id="usuadire" type="text" formControlName="usuadire"/>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuatele" class="col-12 mb-2 md:col-2 md:mb-0">Telefono</label>
+						<div class="col-12 md:col-10">
+							<input pInputText id="usuatele" type="text" formControlName="usuatele"/>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuacamp" class="col-12 mb-2 md:col-2 md:mb-0">Campaña</label>
+						<div class="col-12 md:col-10">
+							<p-dropdown [options]="campana" optionLabel="name" optionValue="value"
+							formControlName="usuacamp" id="usuacamp"></p-dropdown>
+						</div>
+					</div>
+					<div class="field grid">
+						<label htmlFor="usuaesta" class="col-12 mb-2 md:col-2 md:mb-0">Dirección</label>
+						<div class="col-12 md:col-10">
+							<p-dropdown [options]="estadoUser" optionLabel="name" optionValue="value"
+							formControlName="usuaesta" id="usuaesta" ></p-dropdown>
+						</div>
+					</div>
+				</div>
+			</div>
+			<ng-template pTemplate="footer">
+					<button *ngIf="edit" pButton icon="pi pi-check" label="Editar" styleClass="p-button-secundary"></button>
+					<button *ngIf="!edit" pButton icon="pi pi-check" label="Guardar" styleClass="p-button-secundary" (click)="confirmarCreateUser()"></button>
+			</ng-template>
+		</p-dialog>
+		</form>
+</div>
+<p-confirmDialog key="createUser"  rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+<p-confirmDialog key="eliminarUser"  rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+<p-confirmDialog key="editUser"  rejectButtonStyleClass="p-button-outlined"></p-confirmDialog>
+
+|
