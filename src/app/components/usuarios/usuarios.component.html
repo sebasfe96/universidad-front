@@ -161,20 +161,20 @@
 						<label htmlFor="usuacamp" class="col-12 mb-2 md:col-2 md:mb-0">Campaña</label>
 						<div class="col-12 md:col-10">
 							<p-dropdown [options]="campana" optionLabel="name" optionValue="value"
-							formControlName="usuacamp" id="usuacamp"></p-dropdown>
+							[(ngModel)]="campa" [ngModelOptions]="{standalone: true}" id="usuacamp"></p-dropdown>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuaesta" class="col-12 mb-2 md:col-2 md:mb-0">Dirección</label>
+						<label htmlFor="usuaesta" class="col-12 mb-2 md:col-2 md:mb-0">Estado</label>
 						<div class="col-12 md:col-10">
 							<p-dropdown [options]="estadoUser" optionLabel="name" optionValue="value"
-							formControlName="usuaesta" id="usuaesta" ></p-dropdown>
+							[(ngModel)]="usuaesta" [ngModelOptions]="{standalone: true}" id="usuaesta" ></p-dropdown>
 						</div>
 					</div>
 				</div>
 			</div>
 			<ng-template pTemplate="footer">
-					<button *ngIf="edit" pButton icon="pi pi-check" label="Editar" styleClass="p-button-secundary"></button>
+					<button *ngIf="edit" pButton icon="pi pi-check" label="Editar" styleClass="p-button-secundary" (click)="confirmarEditUser()"></button>
 					<button *ngIf="!edit" pButton icon="pi pi-check" label="Guardar" styleClass="p-button-secundary" (click)="confirmarCreateUser()"></button>
 			</ng-template>
 		</p-dialog>

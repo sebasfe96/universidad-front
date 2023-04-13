@@ -28,6 +28,8 @@ export class UsuariosComponent implements OnDestroy, OnInit {
 
   displayCreate: boolean = false
   edit: boolean = false
+  campa: number =0
+  usuaesta: number = 0
 
   campana: any[] = new Array
   estadoUser: any[] = new Array
@@ -44,8 +46,6 @@ export class UsuariosComponent implements OnDestroy, OnInit {
       usuatele: new FormControl('', Validators.required),
       usuaemail: new FormControl('', Validators.required),
       usuadire: new FormControl('', Validators.required),
-      usuacamp: new FormControl('', Validators.required),
-      usuaesta: new FormControl('', Validators.required),
     })
   }
 
@@ -79,6 +79,7 @@ export class UsuariosComponent implements OnDestroy, OnInit {
 
   showDisplayCreate(): void {
     this.userSelect = new Usuarios
+    this.limpiarForm()
     this.edit= false
     this.displayCreate = true
   }
@@ -135,8 +136,8 @@ export class UsuariosComponent implements OnDestroy, OnInit {
       this.userSelect.usuaemail = String(this.userForm.controls['usuaemail'].value)
       this.userSelect.usuadire = String(this.userForm.controls['usuadire'].value)
       this.userSelect.usuatele = String(this.userForm.controls['usuatele'].value)
-      this.userSelect.usuacamp = Number(this.userForm.controls['usuacamp'].value)
-      this.userSelect.usuaesta = Number(this.userForm.controls['usuaesta'].value)
+      this.userSelect.usuacamp = this.campa
+      this.userSelect.usuaesta = this.usuaesta
 
       this.service.createUser(this.userSelect).subscribe({
         next: data => {
@@ -212,8 +213,8 @@ export class UsuariosComponent implements OnDestroy, OnInit {
       this.userSelect.usuaemail = String(this.userForm.controls['usuaemail'].value)
       this.userSelect.usuadire = String(this.userForm.controls['usuadire'].value)
       this.userSelect.usuatele = String(this.userForm.controls['usuatele'].value)
-      this.userSelect.usuacamp = Number(this.userForm.controls['usuacamp'].value)
-      this.userSelect.usuaesta = Number(this.userForm.controls['usuaesta'].value)
+      this.userSelect.usuacamp = this.campa
+      this.userSelect.usuaesta = this.usuaesta
 
       console.log("aquisebas : ", this.userSelect)
       this.service.editUser(this.userSelect).subscribe({
@@ -250,8 +251,6 @@ export class UsuariosComponent implements OnDestroy, OnInit {
       usuatele: new FormControl(String(this.userSelect.usuatele)),
       usuaemail: new FormControl(String(this.userSelect.usuaemail)),
       usuadire: new FormControl(String(this.userSelect.usuadire)),
-      usuacamp: new FormControl(String(this.userSelect.usuacamp)),
-      usuaesta: new FormControl(String(this.userSelect.usuaesta)),
     })
   }
 
@@ -263,8 +262,6 @@ export class UsuariosComponent implements OnDestroy, OnInit {
       usuatele: new FormControl('', Validators.required),
       usuaemail: new FormControl('', Validators.required),
       usuadire: new FormControl('', Validators.required),
-      usuacamp: new FormControl('', Validators.required),
-      usuaesta: new FormControl('', Validators.required),
     })
   }
 
