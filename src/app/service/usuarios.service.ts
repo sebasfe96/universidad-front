@@ -13,10 +13,10 @@ import { Usuarios } from '../domain/usuarios';
 export class UsuariosService {
 
   private url: string =`http://127.0.0.1:8080/api/v1/usuarios/getById/`
-  private urlGetUser: string =`http://127.0.0.1:8080/api/v1/usuarios/findAllUsuarios`
-  private urlCreateUser: string =`http://127.0.0.1:8080/api/v1/usuarios/createUser`
+  private urlGetUser: string =`http://127.0.0.1:8085/inventoried-services/v1/user/user-all`
+  private urlCreateUser: string =`http://127.0.0.1:8085/inventoried-services/v1/user/save`
   private urlDeleteUser: string =`http://127.0.0.1:8080/api/v1/usuarios/deleteById/`
-  private urlEditUser: string =`http://127.0.0.1:8080/api/v1/usuarios/updateUser`
+  private urlEditUser: string =`http://127.0.0.1:8085/inventoried-services/v1/user/update`
 
   constructor(private httpClient: HttpClient) {}
 

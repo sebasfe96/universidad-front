@@ -14,31 +14,31 @@
 					<tr>
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Documento
+								Primer Nombre
 								<p-columnFilter type="text" field="name" display="menu" placeholder="Search by name"></p-columnFilter>
 							</div>
 						</th>
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Nombre
+								Segundo Nombre
 								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
 							</div>
 						</th>
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Edad
+								Apellidos
 								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
 							</div>
 						</th>
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Email
+								Numero documento
 								<p-columnFilter type="date" field="date" display="menu" placeholder="mm/dd/yyyy"></p-columnFilter>
 							</div>
 						</th>
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Direccion
+								Correo
 								<p-columnFilter type="numeric" field="balance" display="menu" currency="USD"></p-columnFilter>
 							</div>
 						</th>
@@ -52,14 +52,14 @@
 
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Campaña
+								Dirección
 								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
 							</div>
 						</th>
 
 						<th>
 							<div class="flex justify-content-between align-items-center">
-								Estado
+								Tipo usuario
 								<p-columnFilter type="text" field="country.name" display="menu" placeholder="Search by country"></p-columnFilter>
 							</div>
 						</th>
@@ -73,28 +73,28 @@
 				<ng-template pTemplate="body" let-usua>
 					<tr>
 						<td>
-							{{usua.usuacodi}}
+							{{usua.firstName}}
 						</td>
 						<td>
-							{{usua.usuanomb}}
+							{{usua.secondName}}
 						</td>
 						<td>
-							{{usua.usuaedad}}
+							{{usua.lastName}}
 						</td>
 						<td>
-							{{usua.usuaemail}}
+							{{usua.documentNumber}}
 						</td>
 						<td>
-							{{usua.usuadire}}
+							{{usua.email}}
 						</td>
 						<td>
-							{{usua.usuatele}}
+							{{usua.telephone}}
 						</td>
 						<td>
-							{{estadoCamp(usua.usuacamp)}}
+							{{usua.address}}
 						</td>
 						<td>
-							{{estado(usua.usuaesta)}}
+							{{typeUserSelect(usua.userType)}}
 						</td>
 						<td>
                         <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-secundary p-button-text" (click)="showDisplayEdit(usua)"></p-button>
@@ -122,53 +122,52 @@
 				<div class="card p-fluid">
 					
 					<div class="field grid">
-						<label htmlFor="usuacodi" class="col-12 mb-2 md:col-2 md:mb-0">Documento</label>
+						<label htmlFor="firstName" class="col-12 mb-2 md:col-2 md:mb-0">Primer Nombre</label>
 						<div class="col-12 md:col-10">
-							<input pInputText id="usuacodi" type="text" formControlName="usuacodi"/>
+							<input pInputText id="firstName" type="text" formControlName="firstName"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuanomb" class="col-12 mb-2 md:col-2 md:mb-0">Nombre</label>
+						<label htmlFor="secondName" class="col-12 mb-2 md:col-2 md:mb-0">Segundo Nombre</label>
 						<div class="col-12 md:col-10">
-							<input pInputText id="usuanomb" type="text" formControlName="usuanomb"/>
+							<input pInputText id="secondName" type="text" formControlName="secondName"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuaedad" class="col-12 mb-2 md:col-2 md:mb-0">Edad</label>
+						<label htmlFor="lastName" class="col-12 mb-2 md:col-2 md:mb-0">Apellidos</label>
 						<div class="col-12 md:col-10">
-							<input pInputText id="usuaedad" type="number" formControlName="usuaedad"/>
+							<input pInputText id="lastName" type="text" formControlName="lastName"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuaemail" class="col-12 mb-2 md:col-2 md:mb-0">Email</label>
+						<label htmlFor="documentNumber" class="col-12 mb-2 md:col-2 md:mb-0"># Documento</label>
 						<div class="col-12 md:col-10">
-							<input pInputText id="usuaemail" type="text" formControlName="usuaemail"/>
+							<input pInputText id="documentNumber" type="text" formControlName="documentNumber"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuadire" class="col-12 mb-2 md:col-2 md:mb-0">Dirección</label>
+						<label htmlFor="email" class="col-12 mb-2 md:col-2 md:mb-0">Correo</label>
 						<div class="col-12 md:col-10">
-							<input pInputText id="usuadire" type="text" formControlName="usuadire"/>
+							<input pInputText id="email" type="text" formControlName="email"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuatele" class="col-12 mb-2 md:col-2 md:mb-0">Telefono</label>
+						<label htmlFor="telephone" class="col-12 mb-2 md:col-2 md:mb-0">Teléfono</label>
 						<div class="col-12 md:col-10">
-							<input pInputText id="usuatele" type="text" formControlName="usuatele"/>
+							<input pInputText id="telephone" type="text" formControlName="telephone"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuacamp" class="col-12 mb-2 md:col-2 md:mb-0">Campaña</label>
+						<label htmlFor="address" class="col-12 mb-2 md:col-2 md:mb-0">Dirección</label>
 						<div class="col-12 md:col-10">
-							<p-dropdown [options]="campana" optionLabel="name" optionValue="value"
-							[(ngModel)]="campa" [ngModelOptions]="{standalone: true}" id="usuacamp"></p-dropdown>
+							<input pInputText id="address" type="text" formControlName="address"/>
 						</div>
 					</div>
 					<div class="field grid">
-						<label htmlFor="usuaesta" class="col-12 mb-2 md:col-2 md:mb-0">Estado</label>
+						<label htmlFor="userType" class="col-12 mb-2 md:col-2 md:mb-0">Tipo usuario</label>
 						<div class="col-12 md:col-10">
-							<p-dropdown [options]="estadoUser" optionLabel="name" optionValue="value"
-							[(ngModel)]="usuaesta" [ngModelOptions]="{standalone: true}" id="usuaesta" ></p-dropdown>
+							<p-dropdown [options]="typeUserList" optionLabel="name" optionValue="value"
+							[(ngModel)]="typeUser" [ngModelOptions]="{standalone: true}" id="userType"></p-dropdown>
 						</div>
 					</div>
 				</div>

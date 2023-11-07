@@ -1,10 +1,11 @@
 export class Usuarios{
-    usuacodi: number | undefined;
-    usuanomb: string | undefined;
-    usuaedad: number | undefined;
-    usuadire: string | undefined;
-    usuatele: string | undefined;
-    usuaemail: string | undefined;
-    usuaesta: number | undefined;
-    usuacamp: number | undefined;
+    id: number | undefined;
+    firstName: string | undefined;
+    secondName: string | undefined;
+    lastName: string | undefined;
+    documentNumber: string | undefined;
+    email: string | undefined;
+    telephone: string | undefined;
+    address: string | undefined;
+    userType: number | undefined;
 }

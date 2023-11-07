@@ -29,23 +29,26 @@ export class UsuariosComponent implements OnDestroy, OnInit {
   displayCreate: boolean = false
   edit: boolean = false
   campa: number =0
-  usuaesta: number = 0
+  typeUser: number = 0
 
-  campana: any[] = new Array
+  typeUserList: any[] = new Array
   estadoUser: any[] = new Array
 
   constructor(private service: UsuariosService, private messageService: MessageService,
     private confirmationService: ConfirmationService) {
 
-    this.campana = [{ value: 1, name: "fedex" }, { value: 2, name: "justeat" }]
-    this.estadoUser = [{ value: 1, name: "Activo" }, { value: 0, name: "Inactivo" }]
+    this.typeUserList = [{ value: 1, name: "Admin" }, { value: 2, name: "User" }]
+
     this.userForm = new FormGroup({
-      usuacodi: new FormControl('', Validators.required),
-      usuanomb: new FormControl('', Validators.required),
-      usuaedad: new FormControl('', Validators.required),
-      usuatele: new FormControl('', Validators.required),
-      usuaemail: new FormControl('', Validators.required),
-      usuadire: new FormControl('', Validators.required),
+      id: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      secondName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      documentNumber: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      telephone: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      userType: new FormControl('', Validators.required),
     })
   }
 
@@ -92,29 +95,18 @@ export class UsuariosComponent implements OnDestroy, OnInit {
   }
 
 
-  estadoCamp(campaña: number): string {
+  typeUserSelect(type: number): string {
 
     let result: string = ""
-    if (campaña == 1) {
-      result = "fedex"
+    if (type == 1) {
+      result = "Admin"
     }
-    else if (campaña == 2) {
-      result = "justeat"
+    else if (type == 2) {
+      result = "User"
     }
     return result;
   }
 
-  estado(estado: number): string {
-
-    let result: string = ""
-    if (estado == 1) {
-      result = "Activo"
-    }
-    else if (estado == 0) {
-      result = "Inactivo"
-    }
-    return result;
-  }
 
   confirmarCreateUser(): void {
     this.confirmationService.confirm({
@@ -129,15 +121,15 @@ export class UsuariosComponent implements OnDestroy, OnInit {
   }
 
   createUser(): void {
-    //if (this.userForm.valid) {
-      this.userSelect.usuacodi = Number(this.userForm.controls['usuacodi'].value)
-      this.userSelect.usuanomb = String(this.userForm.controls['usuanomb'].value)
-      this.userSelect.usuaedad = Number(this.userForm.controls['usuaedad'].value)
-      this.userSelect.usuaemail = String(this.userForm.controls['usuaemail'].value)
-      this.userSelect.usuadire = String(this.userForm.controls['usuadire'].value)
-      this.userSelect.usuatele = String(this.userForm.controls['usuatele'].value)
-      this.userSelect.usuacamp = this.campa
-      this.userSelect.usuaesta = this.usuaesta
+    if (this.userForm.valid) {
+      this.userSelect.firstName = String(this.userForm.controls['firstName'].value)
+      this.userSelect.secondName = String(this.userForm.controls['secondName'].value)
+      this.userSelect.lastName = String(this.userForm.controls['lastName'].value)
+      this.userSelect.address = String(this.userForm.controls['address'].value)
+      this.userSelect.documentNumber = String(this.userForm.controls['documentNumber'].value)
+      this.userSelect.telephone = String(this.userForm.controls['telephone'].value)
+      this.userSelect.email = String(this.userForm.controls['userType'].value)
+      this.userSelect.userType = this.typeUser
 
       this.service.createUser(this.userSelect).subscribe({
         next: data => {
@@ -157,9 +149,9 @@ export class UsuariosComponent implements OnDestroy, OnInit {
         },
       })
 
-    /*} else {
+    } else {
       this.validaCampos()
-    }*/
+    }
 
   }
 
@@ -169,7 +161,7 @@ export class UsuariosComponent implements OnDestroy, OnInit {
       header: 'Eliminar Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-        this.eliminarUser(Number(user.usuacodi))
+        this.eliminarUser(Number(user.id))
        
       }, key: 'eliminarUser'
     })
@@ -207,14 +199,15 @@ export class UsuariosComponent implements OnDestroy, OnInit {
 
   editarUser(): void {
     //if (this.userForm.valid) {
-      this.userSelect.usuacodi = Number(this.userForm.controls['usuacodi'].value)
-      this.userSelect.usuanomb = String(this.userForm.controls['usuanomb'].value)
-      this.userSelect.usuaedad = Number(this.userForm.controls['usuaedad'].value)
-      this.userSelect.usuaemail = String(this.userForm.controls['usuaemail'].value)
-      this.userSelect.usuadire = String(this.userForm.controls['usuadire'].value)
-      this.userSelect.usuatele = String(this.userForm.controls['usuatele'].value)
-      this.userSelect.usuacamp = this.campa
-      this.userSelect.usuaesta = this.usuaesta
+      this.userSelect.id = Number(this.userForm.controls['id'].value)
+      this.userSelect.firstName = String(this.userForm.controls['firstName'].value)
+      this.userSelect.secondName = String(this.userForm.controls['secondName'].value)
+      this.userSelect.lastName = String(this.userForm.controls['lastName'].value)
+      this.userSelect.address = String(this.userForm.controls['address'].value)
+      this.userSelect.documentNumber = String(this.userForm.controls['documentNumber'].value)
+      this.userSelect.telephone = String(this.userForm.controls['telephone'].value)
+      this.userSelect.email = String(this.userForm.controls['userType'].value)
+      this.userSelect.userType = this.typeUser
 
       console.log("aquisebas : ", this.userSelect)
       this.service.editUser(this.userSelect).subscribe({
@@ -245,51 +238,52 @@ export class UsuariosComponent implements OnDestroy, OnInit {
 
   cargaForm():void{
     this.userForm = new FormGroup({
-      usuacodi: new FormControl(String(this.userSelect.usuacodi)),
-      usuanomb: new FormControl(String(this.userSelect.usuanomb)),
-      usuaedad: new FormControl(String(this.userSelect.usuaedad)),
-      usuatele: new FormControl(String(this.userSelect.usuatele)),
-      usuaemail: new FormControl(String(this.userSelect.usuaemail)),
-      usuadire: new FormControl(String(this.userSelect.usuadire)),
+      id: new FormControl(String(this.userSelect.id)),
+      firstName: new FormControl(String(this.userSelect.firstName)),
+      secondName: new FormControl(String(this.userSelect.secondName)),
+      lastName: new FormControl(String(this.userSelect.lastName)),
+      email: new FormControl(String(this.userSelect.email)),
+      address: new FormControl(String(this.userSelect.address)),
+      documentNumber: new FormControl(String(this.userSelect.documentNumber)),
+      telephone: new FormControl(String(this.userSelect.telephone)),
     })
   }
 
   limpiarForm():void{
     this.userForm = new FormGroup({
-      usuacodi: new FormControl('', Validators.required),
-      usuanomb: new FormControl('', Validators.required),
-      usuaedad: new FormControl('', Validators.required),
-      usuatele: new FormControl('', Validators.required),
-      usuaemail: new FormControl('', Validators.required),
-      usuadire: new FormControl('', Validators.required),
+      id: new FormControl('', Validators.required),
+      firstName: new FormControl('', Validators.required),
+      secondName: new FormControl('', Validators.required),
+      lastName: new FormControl('', Validators.required),
+      email: new FormControl('', Validators.required),
+      address: new FormControl('', Validators.required),
+      documentNumber: new FormControl('', Validators.required),
+      telephone: new FormControl('', Validators.required),
     })
   }
 
   validaCampos(): void {
 
-    if (!this.userForm.controls['usuacodi'].valid) {
-      this.showError("Escribir un documento")
+    if (!this.userForm.controls['firstName'].valid) {
+      this.showError("Escribir el primer nombre")
     }
-    if (!this.userForm.controls['usuanomb'].valid) {
-      this.showError("Escribir un nombre")
+    if (!this.userForm.controls['secondName'].valid) {
+      this.showError("Escribir uel segundo nombre")
     }
-    if (!this.userForm.controls['usuaedad'].valid) {
-      this.showError("Escribir una edad")
-    }
-    if (!this.userForm.controls['usuaemail'].valid) {
+    if (!this.userForm.controls['email'].valid) {
       this.showError("Escribir un correo")
     }
-    if (!this.userForm.controls['usuadire'].valid) {
+    if (!this.userForm.controls['address'].valid) {
       this.showError("Escribir un dirección")
     }
-    if (!this.userForm.controls['usuatele'].valid) {
+    if (!this.userForm.controls['telephone'].valid) {
       this.showError("Escribir un telefono")
     }
-    if (!this.userForm.controls['usuacamp'].valid) {
-      this.showError("Escoger una campaña")
+    if (!this.userForm.controls['lastName'].valid) {
+      this.showError("Escribir tus apellidos")
     }
-    if (!this.userForm.controls['usuaesta'].valid) {
-      this.showError("Escoger un estado")
+    if (!this.userForm.controls['documentNumber'].valid) {
+      this.showError("Escribir tu documento de identidad")
     }
   }
 
